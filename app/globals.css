@@ -157,30 +157,33 @@
   0% {
     background-position: -200% -200%;
   }
-  
-  100% {
+  50% {
     background-position: 200% 200%;
+  }
+  100% {
+    background-position: -200% -200%;
   }
 }
 
 .wave-animation {
   position: relative;
-  background: #12A2BF;
+  background: #000000;
   background-image: 
     linear-gradient(
-      135deg,
+      90deg,
       transparent 0%,
-      transparent 20%,
-      #2DEBDA 25%,
-      #18698C 35%,
-      #114B64 45%,
-      #18698C 55%,
-      #2DEBDA 65%,
-      transparent 70%,
+      transparent 12.5%,
+      #0a3d4f 25%,
+      #102a43 37.5%,
+      #1a2636 50%,
+      #102a43 62.5%,
+      #0a3d4f 75%,
+      transparent 87.5%,
       transparent 100%
     );
   background-size: 400% 400%;
-  animation: wave-movement 3s ease-in-out infinite;
+  animation: wave-movement 40s ease-in-out infinite;
+  overflow: hidden;
 }
 
 @layer base {

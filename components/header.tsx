@@ -82,13 +82,13 @@ export function Header() {
             </div>
 
             {/* Theme Toggle */}
-            <button
+            {/* <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="p-2 rounded-lg text-white hover:bg-white/20 transition-colors duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

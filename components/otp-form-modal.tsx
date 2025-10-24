@@ -91,9 +91,9 @@ export function OTPFormModal({ isOpen, onClose, onSubmit, fileName }: OTPFormMod
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-card border border-border rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#0A2C3D] border border-border rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-border sticky top-0 bg-card">
+        <div className="flex items-center justify-between p-6 border-b border-border sticky top-0 bg-[#0A2C3D] text-white">
           <h2 className="text-xl font-bold">{t("form.scanInfo")}</h2>
           <button onClick={onClose} className="p-1 hover:bg-muted rounded-lg transition-colors">
             <X className="w-5 h-5" />
@@ -101,7 +101,7 @@ export function OTPFormModal({ isOpen, onClose, onSubmit, fileName }: OTPFormMod
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-4 text-white">
           {/* Email with OTP */}
           <div>
             <label className="block text-sm font-medium mb-2">{t("form.email")}</label>
