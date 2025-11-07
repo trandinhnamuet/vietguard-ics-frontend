@@ -77,7 +77,7 @@ const translations = {
     "about.team": "Đội ngũ của chúng tôi",
     "about.teamText":
       "Đội ngũ của chúng tôi bao gồm các chuyên gia bảo mật, nhà phát triển và nhà nghiên cứu có kinh nghiệm, cam kết làm cho bảo mật Android dễ tiếp cận và toàn diện cho mọi người.",
-    "footer.company": "CÔNG TY CỔ PHẦN AN NINH MẠNG QUỐC TẾ",
+    "footer.company": "CÔNG TY CỔ PHẦN AN NINH MẠNG QUỐC TẾ - ICS",
     "footer.office": "Văn phòng: TT3-5 Khu đô thị Đại Kim mới, Định Công, Hà Nội",
     "footer.phone": "Điện thoại: 0931.487.231",
     "footer.hotline": "Hotline: 0707.806.860",
@@ -152,7 +152,7 @@ const translations = {
     "about.team": "Our Team",
     "about.teamText":
       "Our team consists of experienced security professionals, developers, and researchers dedicated to making Android security accessible and comprehensive for everyone.",
-    "footer.company": "INTERNATIONAL CYBERSECURITY COMPANY",
+    "footer.company": "INTERNATIONAL CYBERSECURITY COMPANY - ICS",
     "footer.office": "Office: TT3-5 Dai Kim New Urban Area, Dinh Cong, Hanoi",
     "footer.phone": "Phone: 0931.487.231",
     "footer.hotline": "Hotline: 0707.806.860",

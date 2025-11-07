@@ -12,7 +12,11 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-white">{t("footer.company")}</h3>
+            <a href="https://icss.com.vn" target="_blank" rel="noopener noreferrer">
+              <h3 className="font-bold text-lg mb-4 text-white hover:text-primary transition-colors cursor-pointer">
+                {t("footer.company")}
+              </h3>
+            </a>
             <div className="space-y-3 text-sm text-white/80">
               <p className="flex gap-2">
                 <MapPin className="w-4 h-4 flex-shrink-0 text-primary mt-0.5" />
