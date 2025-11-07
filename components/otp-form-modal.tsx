@@ -68,23 +68,33 @@ export function OTPFormModal({ isOpen, onClose, onSubmit, fileName }: OTPFormMod
     if (!otpVerified) return
 
     setSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      onSubmit(formData)
-      setSubmitting(false)
-      setFormData({
-        email: "",
-        otp: "",
-        fullName: "",
-        company: "",
-        phone: "",
-        notes: "",
-        requirements: "",
+    try {
+      // Gửi dữ liệu lên API Next.js
+      const res = await fetch('/api/submit-otp-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       })
-      setOtpSent(false)
-      setOtpVerified(false)
-      onClose()
-    }, 1000)
+      if (res.ok) {
+        onSubmit(formData)
+        setFormData({
+          email: "",
+          otp: "",
+          fullName: "",
+          company: "",
+          phone: "",
+          notes: "",
+          requirements: "",
+        })
+        setOtpSent(false)
+        setOtpVerified(false)
+        onClose()
+      }
+    } catch (err) {
+      // Có thể show lỗi nếu cần
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (!isOpen) return null
@@ -197,6 +207,7 @@ export function OTPFormModal({ isOpen, onClose, onSubmit, fileName }: OTPFormMod
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="+84 123 456 789"
+                  required
                 />
               </div>
 
