@@ -101,7 +101,7 @@ export function Footer() {
         {/* Divider */}
         <div className="border-t border-white/20 pt-8">
           <p className="text-center text-sm text-white/70">
-            © 2025 VietGuardScan. All rights reserved. | Powered by ICSS
+            © 2025 VietGuardScan. All rights reserved. | Powered by ICS
           </p>
         </div>
       </div>
