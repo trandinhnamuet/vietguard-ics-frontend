@@ -123,7 +123,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-primary to-secondary text-white font-semibold py-3 rounded-lg hover:shadow-lg transition-all"
+                className="w-full bg-white text-black font-semibold py-3 rounded-lg hover:bg-gray-100 transition-all"
               >
                 {t("contact.send")}
               </button>

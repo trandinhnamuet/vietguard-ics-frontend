@@ -82,7 +82,7 @@ export function FileUpload({ onFileSelect, onScan }: FileUploadProps) {
           </div>
           <button
             onClick={onScan}
-            className="w-full mt-4 bg-primary text-primary-foreground font-semibold py-3 rounded-lg hover:bg-primary/80 hover:shadow-lg transition-all"
+            className="w-full mt-4 bg-white text-black font-semibold py-3 rounded-lg hover:bg-gray-100 hover:shadow-lg transition-all"
           >
             {t("home.scan")}
           </button>
