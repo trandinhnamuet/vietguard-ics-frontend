@@ -22,6 +22,8 @@ export default function Home() {
   const [scanResult, setScanResult] = useState<ScanStatusResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [memberEmail, setMemberEmail] = useState<string | null>(null)
+  const [isDownloading, setIsDownloading] = useState(false)
+  const [downloadSuccess, setDownloadSuccess] = useState(false)
   const pollingCleanupRef = useRef<(() => void) | null>(null)
 
   // Cleanup polling on unmount
@@ -125,13 +127,26 @@ export default function Home() {
       return
     }
 
+    setIsDownloading(true)
+    setError(null)
+    setDownloadSuccess(false)
+
     try {
       // Import downloadReport to avoid circular dependency
       const { downloadReport } = await import("@/lib/api/scanService")
       // Don't pass fixed filename - let backend decide based on actual file type
       await downloadReport(taskId)
+      
+      // Show success message
+      setDownloadSuccess(true)
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        setDownloadSuccess(false)
+      }, 3000)
     } catch (err: any) {
       setError(err.message || "Failed to download report")
+    } finally {
+      setIsDownloading(false)
     }
   }
 
@@ -253,18 +268,29 @@ export default function Home() {
                 </div>
               )}
 
+              {/* Download Success Message */}
+              {downloadSuccess && (
+                <div className="p-3 bg-success/10 border border-success rounded-lg flex gap-2 items-start text-sm text-success">
+                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                  <p>Report downloaded successfully!</p>
+                </div>
+              )}
+
               {/* Action Buttons */}
               <div className="flex gap-3">
                 <button
                   onClick={handleDownloadReport}
-                  className="flex-1 px-4 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium flex items-center justify-center gap-2"
+                  disabled={isDownloading}
+                  className="flex-1 px-4 py-3 bg-white text-black rounded-lg hover:bg-gray-100 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center gap-2"
                 >
-                  <Download className="w-5 h-5" />
-                  Download Report
+                  {isDownloading && <Loader2 className="w-5 h-5 animate-spin" />}
+                  {isDownloading ? "Downloading..." : "Download Report"}
+                  {!isDownloading && <Download className="w-5 h-5" />}
                 </button>
                 <button
                   onClick={handleReset}
-                  className="flex-1 px-4 py-3 border border-border rounded-lg hover:bg-white/5 transition-colors font-medium flex items-center justify-center gap-2"
+                  disabled={isDownloading}
+                  className="flex-1 px-4 py-3 border border-border rounded-lg hover:bg-white/5 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center gap-2"
                 >
                   <RotateCcw className="w-5 h-5" />
                   Scan Another
