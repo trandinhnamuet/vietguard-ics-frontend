@@ -16,6 +16,7 @@ interface OTPFormModalProps {
   onClose: () => void
   onSubmit: (data: OTPFormData) => void
   fileName: string
+  fileSize?: number
 }
 
 export interface OTPFormData {
@@ -26,9 +27,11 @@ export interface OTPFormData {
   phone: string
   notes: string
   memberEmail?: string
+  fileName?: string
+  fileSize?: number
 }
 
-export function OTPFormModal({ isOpen, onClose, onSubmit, fileName }: OTPFormModalProps) {
+export function OTPFormModal({ isOpen, onClose, onSubmit, fileName, fileSize }: OTPFormModalProps) {
   const { t } = useLanguage()
   const [formData, setFormData] = useState<OTPFormData>({
     email: "",
@@ -130,6 +133,8 @@ export function OTPFormModal({ isOpen, onClose, onSubmit, fileName }: OTPFormMod
         company_name: formData.company,
         phone: formData.phone,
         note: formData.notes,
+        file_name: fileName,
+        file_size: fileSize,
       })
 
       // Step 2: Create member with service (AppTotalGo)

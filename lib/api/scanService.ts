@@ -31,6 +31,8 @@ export interface SubmitUserInfoRequest {
   company_name: string
   phone: string
   note?: string
+  file_name?: string
+  file_size?: number
 }
 
 export interface SubmitUserInfoResponse {

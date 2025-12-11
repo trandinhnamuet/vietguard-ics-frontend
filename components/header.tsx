@@ -49,6 +49,9 @@ export function Header() {
             <Link href="/" className="text-base font-medium text-white hover:text-primary transition-colors duration-200 drop-shadow">
               {t("header.home")}
             </Link>
+            <Link href="/members" className="text-base font-medium text-white hover:text-primary transition-colors duration-200 drop-shadow">
+              Members
+            </Link>
             <Link href="/contact" className="text-base font-medium text-white hover:text-primary transition-colors duration-200 drop-shadow">
               {t("header.contact")}
             </Link>

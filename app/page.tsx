@@ -338,6 +338,7 @@ export default function Home() {
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleFormSubmit}
         fileName={selectedFile?.name || ""}
+        fileSize={selectedFile ? Number((selectedFile.size / (1024 * 1024)).toFixed(2)) : undefined}
       />
 
       <Footer />
