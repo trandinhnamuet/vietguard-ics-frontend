@@ -150,7 +150,7 @@ export default function MembersPage() {
 
         {/* Members Table */}
         {!loading && !error && (
-          <div className="max-w-6xl mx-auto">
+          <div className="w-full">
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-2xl overflow-hidden">
               {/* Table Header */}
               <div className="bg-white/5 border-b border-white/20 p-4 flex justify-between items-center">
@@ -249,7 +249,7 @@ export default function MembersPage() {
                           </td>
                           <td className="px-4 py-3 text-white/80">
                             {member.note ? (
-                              <div className="max-w-xs truncate" title={member.note}>
+                              <div className="whitespace-pre-wrap" title={member.note}>
                                 {member.note}
                               </div>
                             ) : (
@@ -258,7 +258,7 @@ export default function MembersPage() {
                           </td>
                           <td className="px-4 py-3 text-white/80">
                             {member.file_name ? (
-                              <div className="max-w-xs truncate" title={member.file_name}>
+                              <div className="break-all" title={member.file_name}>
                                 {member.file_name}
                               </div>
                             ) : (

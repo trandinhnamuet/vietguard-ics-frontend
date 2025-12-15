@@ -21,6 +21,12 @@ export default async function handler(
   try {
     // Call backend API to get member verifications 
     const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
+    console.log(`${backendUrl}/members/verifications/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     const response = await fetch(`${backendUrl}/members/verifications/all`, {
       method: 'GET',
       headers: {
