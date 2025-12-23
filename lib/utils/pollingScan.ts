@@ -41,12 +41,14 @@ export function startScanPolling({
       onStatusUpdate(statusResponse)
 
       // Check status from data.status (new format) or status (legacy)
-      const currentStatus = statusResponse.data?.status || statusResponse.status
+      const currentStatus = (statusResponse.data?.status || statusResponse.status)?.toLowerCase()
       
-      if (currentStatus === "completed" || currentStatus === "Success" || currentStatus === "failed") {
+      if (currentStatus === "completed" || currentStatus === "success" || currentStatus === "failed") {
         isActive = false
-        if (currentStatus === "completed" || currentStatus === "Success") {
+        if (currentStatus === "completed" || currentStatus === "success") {
           onSuccess(statusResponse)
+        } else if (currentStatus === "failed") {
+          onError(new Error("Đã có lỗi xảy ra. File apk của bạn sai cấu trúc hoặc chưa có chữ kí."))
         } else {
           onError(new Error(statusResponse.error || "Scan failed"))
         }
@@ -82,6 +84,8 @@ export function calculateScanProgress(status: string): number {
       return 100
     case "failed":
       return 100
+    case "Failed":
+      return 100
     default:
       return 0
   }
@@ -96,6 +100,7 @@ export function formatStatusText(status: string): string {
     processing: "Scanning app...",
     completed: "Scan completed",
     failed: "Scan failed",
+    Failed: "Scan failed",
   }
   return statusMap[status] || status
 }
