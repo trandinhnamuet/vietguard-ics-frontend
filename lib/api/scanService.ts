@@ -17,6 +17,8 @@ export interface SendOtpResponse {
 export interface VerifyOtpRequest {
   email: string
   otp: string
+  ipv4?: string
+  ipv6?: string
 }
 
 export interface VerifyOtpResponse {
@@ -126,14 +128,14 @@ export async function sendOtp(email: string): Promise<SendOtpResponse> {
 /**
  * 2. Verify OTP
  */
-export async function verifyOtp(email: string, otp: string): Promise<VerifyOtpResponse> {
+export async function verifyOtp(email: string, otp: string, ipv4?: string, ipv6?: string): Promise<VerifyOtpResponse> {
   try {
     const response = await fetch(`${API_BASE_URL}/members/verify-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, otp }),
+      body: JSON.stringify({ email, otp, ipv4, ipv6 }),
     })
 
     if (!response.ok) {

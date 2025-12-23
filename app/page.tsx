@@ -9,6 +9,7 @@ import { useLanguage } from "@/components/language-provider"
 import { CheckCircle, AlertCircle, Download, Loader2, RotateCcw } from "lucide-react"
 import { StatsCharts } from "@/components/stats-charts"
 import { createScanTask, getClientIp } from "@/lib/api/scanService"
+import { recordAccess } from "@/lib/api/accessLogService"
 import { startScanPolling, calculateScanProgress, formatStatusText, type ScanStatusResponse } from "@/lib/utils/pollingScan"
 
 export default function Home() {
@@ -25,6 +26,19 @@ export default function Home() {
   const [isDownloading, setIsDownloading] = useState(false)
   const [downloadSuccess, setDownloadSuccess] = useState(false)
   const pollingCleanupRef = useRef<(() => void) | null>(null)
+
+  // Record access on page load
+  useEffect(() => {
+    const recordPageAccess = async () => {
+      try {
+        const ip = await getClientIp()
+        await recordAccess({ ipv4: ip })
+      } catch (error) {
+        console.warn('Failed to record access:', error)
+      }
+    }
+    recordPageAccess()
+  }, [])
 
   // Cleanup polling on unmount
   useEffect(() => {

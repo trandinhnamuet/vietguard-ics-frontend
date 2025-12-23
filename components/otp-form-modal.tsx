@@ -9,6 +9,7 @@ import {
   verifyOtp,
   submitUserInfo,
   createMemberWithService,
+  getClientIp,
 } from "@/lib/api/scanService"
 
 interface OTPFormModalProps {
@@ -89,7 +90,9 @@ export function OTPFormModal({ isOpen, onClose, onSubmit, fileName, fileSize }: 
     setLoading(true)
     setError(null)
     try {
-      const result = await verifyOtp(formData.email, formData.otp)
+      // Get client IP to update access log with email
+      const clientIp = await getClientIp()
+      const result = await verifyOtp(formData.email, formData.otp, clientIp)
       if (result.verified) {
         setOtpVerified(true)
         setSuccessMessage("OTP verified successfully")
