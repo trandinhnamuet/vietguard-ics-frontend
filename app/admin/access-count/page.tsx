@@ -210,120 +210,123 @@ export default function AccessCountPage() {
   }
 
   return (
-    <>
+    <div className="min-h-[calc(100vh-120px)]">
       {/* Title */}
-      <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+      <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
         Access Count Statistics
       </h1>
-      <p className="text-lg text-muted-foreground mb-8">
+      <p className="text-xl text-slate-300 mb-12">
         Monitor website access logs and visitor statistics
       </p>
 
       {/* Stats Cards */}
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <Users className="w-8 h-8 text-primary" />
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 hover:bg-slate-800/60 transition-all duration-200 hover:scale-105">
+          <div className="flex items-center gap-6">
+            <div className="p-4 bg-blue-600/20 rounded-xl">
+              <Users className="w-10 h-10 text-blue-400" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Unique IPs</p>
-              <p className="text-3xl font-bold">{(typeof stats.uniqueIPs === 'number' ? stats.uniqueIPs : 0).toLocaleString('en-US')}</p>
+              <p className="text-slate-400 text-sm mb-2">Unique IPs</p>
+              <p className="text-4xl font-bold text-white">{(typeof stats.uniqueIPs === 'number' ? stats.uniqueIPs : 0).toLocaleString('en-US')}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-secondary/10 rounded-lg">
-              <Eye className="w-8 h-8 text-secondary" />
+        <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 hover:bg-slate-800/60 transition-all duration-200 hover:scale-105">
+          <div className="flex items-center gap-6">
+            <div className="p-4 bg-purple-600/20 rounded-xl">
+              <Eye className="w-10 h-10 text-purple-400" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Total Accesses</p>
-              <p className="text-3xl font-bold">{(typeof stats.totalAccessCount === 'number' ? stats.totalAccessCount : 0).toLocaleString('en-US')}</p>
+              <p className="text-slate-400 text-sm mb-2">Total Accesses</p>
+              <p className="text-4xl font-bold text-white">{(typeof stats.totalAccessCount === 'number' ? stats.totalAccessCount : 0).toLocaleString('en-US')}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Search Box */}
-      <div className="flex gap-4 mb-6">
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <div className="flex gap-6 mb-8">
+        <div className="relative flex-1 max-w-lg">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
           <Input
             placeholder="Search by IP or email..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="pl-10"
+            className="pl-12 py-3 bg-slate-800/40 border-slate-700/50 text-white placeholder-slate-400 focus:bg-slate-800/60 transition-all duration-200"
           />
         </div>
-        <Button onClick={handleSearch}>
+        <Button 
+          onClick={handleSearch}
+          className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium transition-all duration-200 hover:scale-105"
+        >
           Search
         </Button>
       </div>
 
       {/* Table */}
-      <div className="bg-card border border-border rounded-xl overflow-hidden">
+      <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl overflow-hidden hover:bg-slate-800/50 transition-all duration-200">
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <span className="ml-3 text-muted-foreground">Loading data...</span>
+          <div className="flex items-center justify-center py-24">
+            <Loader2 className="h-10 w-10 animate-spin text-blue-400" />
+            <span className="ml-4 text-slate-300 text-lg">Loading data...</span>
           </div>
         ) : (
           <Table>
             <TableHeader>
-              <TableRow>
+              <TableRow className="border-slate-700/50 hover:bg-slate-700/30">
                 <TableHead 
-                  className="cursor-pointer select-none hover:bg-muted/50"
+                  className="cursor-pointer select-none hover:bg-slate-700/40 transition-all duration-200 text-slate-300 font-semibold"
                   onClick={() => handleSort('id')}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center hover:scale-105 transition-transform duration-200">
                     ID
                     {renderSortIcon('id')}
                   </div>
                 </TableHead>
                 <TableHead 
-                  className="cursor-pointer select-none hover:bg-muted/50"
+                  className="cursor-pointer select-none hover:bg-slate-700/40 transition-all duration-200 text-slate-300 font-semibold"
                   onClick={() => handleSort('ipv4')}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center hover:scale-105 transition-transform duration-200">
                     IPv4
                     {renderSortIcon('ipv4')}
                   </div>
                 </TableHead>
                 <TableHead 
-                  className="cursor-pointer select-none hover:bg-muted/50"
+                  className="cursor-pointer select-none hover:bg-slate-700/40 transition-all duration-200 text-slate-300 font-semibold"
                   onClick={() => handleSort('ipv6')}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center hover:scale-105 transition-transform duration-200">
                     IPv6
                     {renderSortIcon('ipv6')}
                   </div>
                 </TableHead>
                 <TableHead 
-                  className="cursor-pointer select-none hover:bg-muted/50"
+                  className="cursor-pointer select-none hover:bg-slate-700/40 transition-all duration-200 text-slate-300 font-semibold"
                   onClick={() => handleSort('email')}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center hover:scale-105 transition-transform duration-200">
                     Email
                     {renderSortIcon('email')}
                   </div>
                 </TableHead>
                 <TableHead 
-                  className="cursor-pointer select-none hover:bg-muted/50"
+                  className="cursor-pointer select-none hover:bg-slate-700/40 transition-all duration-200 text-slate-300 font-semibold"
                   onClick={() => handleSort('access_count')}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center hover:scale-105 transition-transform duration-200">
                     Count
                     {renderSortIcon('access_count')}
                   </div>
                 </TableHead>
                 <TableHead 
-                  className="cursor-pointer select-none hover:bg-muted/50"
+                  className="cursor-pointer select-none hover:bg-slate-700/40 transition-all duration-200 text-slate-300 font-semibold"
                   onClick={() => handleSort('last_access_time')}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center hover:scale-105 transition-transform duration-200">
                     Last Access
                     {renderSortIcon('last_access_time')}
                   </div>
@@ -333,25 +336,27 @@ export default function AccessCountPage() {
             <TableBody>
               {accessLogs.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
+                  <TableCell colSpan={6} className="text-center py-16 text-slate-400">
                     No data
                   </TableCell>
                 </TableRow>
               ) : (
-                accessLogs.map((log) => (
-                  <TableRow key={log.id}>
-                    <TableCell className="font-medium">{log.id}</TableCell>
-                    <TableCell className="font-mono text-sm">{log.ipv4 || '-'}</TableCell>
-                    <TableCell className="font-mono text-sm max-w-[200px] truncate" title={log.ipv6 || undefined}>
+                accessLogs.map((log, index) => (
+                  <TableRow key={log.id} className={`border-slate-700/30 hover:bg-slate-700/20 transition-all duration-200 ${
+                    index % 2 === 0 ? 'bg-slate-800/20' : 'bg-transparent'
+                  }`}>
+                    <TableCell className="font-medium text-white">{log.id}</TableCell>
+                    <TableCell className="font-mono text-sm text-slate-300">{log.ipv4 || '-'}</TableCell>
+                    <TableCell className="font-mono text-sm max-w-[200px] truncate text-slate-300" title={log.ipv6 || undefined}>
                       {log.ipv6 || '-'}
                     </TableCell>
-                    <TableCell>{log.email || '-'}</TableCell>
+                    <TableCell className="text-slate-300">{log.email || '-'}</TableCell>
                     <TableCell>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-600/20 text-blue-400 border border-blue-600/30">
                         {log.access_count}
                       </span>
                     </TableCell>
-                    <TableCell className="text-muted-foreground">
+                    <TableCell className="text-slate-400">
                       {formatDate(log.last_access_time)}
                     </TableCell>
                   </TableRow>
@@ -364,8 +369,8 @@ export default function AccessCountPage() {
 
       {/* Pagination */}
       {!loading && totalPages > 1 && (
-        <div className="mt-6 flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-8 flex items-center justify-between bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6">
+          <p className="text-slate-300">
             Showing {((page - 1) * limit) + 1} - {Math.min(page * limit, total)} of {total} records
           </p>
           <Pagination>
@@ -374,7 +379,7 @@ export default function AccessCountPage() {
                 <PaginationPrevious 
                   href="#" 
                   onClick={(e) => { e.preventDefault(); if (page > 1) setPage(page - 1) }}
-                  className={page === 1 ? 'pointer-events-none opacity-50' : ''}
+                  className={`transition-all duration-200 hover:scale-105 ${page === 1 ? 'pointer-events-none opacity-50' : 'hover:bg-slate-700/50'}`}
                 />
               </PaginationItem>
               {renderPaginationItems()}
@@ -382,13 +387,13 @@ export default function AccessCountPage() {
                 <PaginationNext 
                   href="#" 
                   onClick={(e) => { e.preventDefault(); if (page < totalPages) setPage(page + 1) }}
-                  className={page === totalPages ? 'pointer-events-none opacity-50' : ''}
+                  className={`transition-all duration-200 hover:scale-105 ${page === totalPages ? 'pointer-events-none opacity-50' : 'hover:bg-slate-700/50'}`}
                 />
               </PaginationItem>
             </PaginationContent>
           </Pagination>
         </div>
       )}
-    </>
+    </div>
   )
 }

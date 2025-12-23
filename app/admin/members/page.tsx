@@ -109,34 +109,34 @@ export default function MembersPage() {
   }
 
   return (
-    <>
+    <div className="min-h-[calc(100vh-120px)]">
       {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent flex items-center gap-3">
-          <Users className="w-10 h-10 text-primary" />
+      <div className="mb-12">
+        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent flex items-center gap-4">
+          <Users className="w-12 h-12 text-purple-400" />
           Member Verifications
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-xl text-slate-300">
           Manage and view all verified member information
         </p>
       </div>
 
       {/* Error Message */}
       {error && (
-        <div className="mb-6 p-4 bg-destructive/10 border border-destructive rounded-lg flex gap-3 items-start">
-          <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+        <div className="mb-8 p-6 bg-red-900/20 border border-red-600/30 rounded-xl flex gap-4 items-start">
+          <AlertCircle className="w-6 h-6 text-red-400 flex-shrink-0 mt-1" />
           <div>
-            <p className="text-destructive font-medium">{error}</p>
+            <p className="text-red-400 font-medium text-lg">{error}</p>
           </div>
         </div>
       )}
 
       {/* Loading State */}
       {loading && (
-        <div className="text-center py-12">
-          <div className="bg-card border border-border rounded-xl p-8 shadow-lg inline-block">
-            <Loader2 className="w-8 h-8 text-primary animate-spin mx-auto mb-4" />
-            <p className="text-muted-foreground">Loading member verifications...</p>
+        <div className="text-center py-24">
+          <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-12 shadow-lg inline-block">
+            <Loader2 className="w-12 h-12 text-purple-400 animate-spin mx-auto mb-6" />
+            <p className="text-slate-300 text-lg">Loading member verifications...</p>
           </div>
         </div>
       )}
@@ -144,78 +144,78 @@ export default function MembersPage() {
       {/* Members Table */}
       {!loading && !error && (
         <div className="w-full">
-          <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden">
+          <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl shadow-lg overflow-hidden">
             {/* Table Header */}
-            <div className="bg-muted border-b border-border p-4 flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
-                <Users className="w-5 h-5" />
+            <div className="bg-slate-800/60 border-b border-slate-700/50 p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+                <Users className="w-6 h-6 text-purple-400" />
                 Members ({members.length})
               </h2>
               <button
                 onClick={exportToExcel}
                 disabled={exporting || members.length === 0}
-                className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium flex items-center gap-2"
+                className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-lg disabled:bg-slate-600 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105 font-medium flex items-center gap-3 shadow-lg"
               >
-                {exporting && <Loader2 className="w-4 h-4 animate-spin" />}
+                {exporting && <Loader2 className="w-5 h-5 animate-spin" />}
                 {exporting ? "Exporting..." : "Export Excel"}
-                {!exporting && <Download className="w-4 h-4" />}
+                {!exporting && <Download className="w-5 h-5" />}
               </button>
             </div>
 
             {/* Table Content */}
             {members.length === 0 ? (
-              <div className="p-12 text-center">
-                <Users className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
-                <p className="text-muted-foreground text-lg">No member verifications found</p>
+              <div className="p-24 text-center">
+                <Users className="w-20 h-20 text-slate-600 mx-auto mb-6" />
+                <p className="text-slate-400 text-xl">No member verifications found</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="bg-muted border-b border-border">
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
-                        <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4" />
+                    <tr className="bg-slate-800/60 border-b border-slate-700/50">
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
+                        <div className="flex items-center gap-3">
+                          <Users className="w-5 h-5" />
                           Full Name
                         </div>
                       </th>
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
-                        <div className="flex items-center gap-2">
-                          <Mail className="w-4 h-4" />
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
+                        <div className="flex items-center gap-3">
+                          <Mail className="w-5 h-5" />
                           Email
                         </div>
                       </th>
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
-                        <div className="flex items-center gap-2">
-                          <Phone className="w-4 h-4" />
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
+                        <div className="flex items-center gap-3">
+                          <Phone className="w-5 h-5" />
                           Phone
                         </div>
                       </th>
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
-                        <div className="flex items-center gap-2">
-                          <Building className="w-4 h-4" />
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
+                        <div className="flex items-center gap-3">
+                          <Building className="w-5 h-5" />
                           Company
                         </div>
                       </th>
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
-                        <div className="flex items-center gap-2">
-                          <FileText className="w-4 h-4" />
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
+                        <div className="flex items-center gap-3">
+                          <FileText className="w-5 h-5" />
                           Note
                         </div>
                       </th>
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
-                        <div className="flex items-center gap-2">
-                          <File className="w-4 h-4" />
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
+                        <div className="flex items-center gap-3">
+                          <File className="w-5 h-5" />
                           File Name
                         </div>
                       </th>
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
-                        <div className="flex items-center gap-2">
-                          <File className="w-4 h-4" />
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
+                        <div className="flex items-center gap-3">
+                          <File className="w-5 h-5" />
                           File Size (MB)
                         </div>
                       </th>
-                      <th className="text-left px-4 py-3 text-foreground font-semibold">
+                      <th className="text-left px-6 py-4 text-slate-300 font-bold">
                         Created At
                       </th>
                     </tr>
@@ -224,23 +224,23 @@ export default function MembersPage() {
                     {members.map((member, index) => (
                       <tr
                         key={member.id}
-                        className={`border-b border-border hover:bg-muted/50 transition-colors ${
-                          index % 2 === 0 ? 'bg-muted/20' : 'bg-transparent'
+                        className={`border-b border-slate-700/30 hover:bg-slate-700/20 transition-all duration-200 ${
+                          index % 2 === 0 ? 'bg-slate-800/20' : 'bg-transparent'
                         }`}
                       >
-                        <td className="px-4 py-3 text-foreground">
+                        <td className="px-6 py-4 text-white font-medium">
                           {member.full_name || '-'}
                         </td>
-                        <td className="px-4 py-3 text-muted-foreground">
+                        <td className="px-6 py-4 text-slate-300">
                           {member.member_email || '-'}
                         </td>
-                        <td className="px-4 py-3 text-muted-foreground">
+                        <td className="px-6 py-4 text-slate-300">
                           {member.phone || '-'}
                         </td>
-                        <td className="px-4 py-3 text-muted-foreground">
+                        <td className="px-6 py-4 text-slate-300">
                           {member.company_name || '-'}
                         </td>
-                        <td className="px-4 py-3 text-muted-foreground">
+                        <td className="px-6 py-4 text-slate-300">
                           {member.note ? (
                             <div className="whitespace-pre-wrap max-w-xs" title={member.note}>
                               {member.note}
@@ -249,7 +249,7 @@ export default function MembersPage() {
                             '-'
                           )}
                         </td>
-                        <td className="px-4 py-3 text-muted-foreground">
+                        <td className="px-6 py-4 text-slate-300">
                           {member.file_name ? (
                             <div className="break-all max-w-xs" title={member.file_name}>
                               {member.file_name}
@@ -258,10 +258,10 @@ export default function MembersPage() {
                             '-'
                           )}
                         </td>
-                        <td className="px-4 py-3 text-muted-foreground">
+                        <td className="px-6 py-4 text-slate-300">
                           {member.file_size ? `${member.file_size} MB` : '-'}
                         </td>
-                        <td className="px-4 py-3 text-muted-foreground text-sm">
+                        <td className="px-6 py-4 text-slate-400 text-sm">
                           {formatDate(member.created_at)}
                         </td>
                       </tr>
@@ -273,6 +273,6 @@ export default function MembersPage() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
