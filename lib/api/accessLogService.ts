@@ -53,7 +53,7 @@ export interface GetAccessCountResponse {
  * Record access log (call when user visits the page)
  */
 export async function recordAccess(request: RecordAccessRequest): Promise<RecordAccessResponse> {
-  const response = await fetch(`${API_BASE_URL}/access-log/record`, {
+  const response = await fetch(`${API_BASE_URL}/access-logs/record`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export async function getAccessLogs(params: GetAccessLogsParams = {}): Promise<G
   if (params.sortOrder) searchParams.append('sortOrder', params.sortOrder)
   if (params.search) searchParams.append('search', params.search)
 
-  const url = `${API_BASE_URL}/access-log?${searchParams.toString()}`
+  const url = `${API_BASE_URL}/access-logs?${searchParams.toString()}`
   
   const response = await fetch(url, {
     method: 'GET',
@@ -102,7 +102,7 @@ export async function getAccessLogs(params: GetAccessLogsParams = {}): Promise<G
  * Get total access count statistics
  */
 export async function getAccessCount(): Promise<GetAccessCountResponse> {
-  const response = await fetch(`${API_BASE_URL}/access-log/count`, {
+  const response = await fetch(`${API_BASE_URL}/access-logs/count`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

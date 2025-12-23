@@ -31,8 +31,20 @@ export default function Home() {
   useEffect(() => {
     const recordPageAccess = async () => {
       try {
-        const ip = await getClientIp()
-        await recordAccess({ ipv4: ip })
+        const ipData = await getClientIp()
+        console.log('Client IP data:', ipData)
+        
+        if (!ipData.ipv4) {
+          console.warn('Failed to get IPv4 address')
+        }
+        if (!ipData.ipv6) {
+          console.warn('Failed to get IPv6 address')
+        }
+        
+        await recordAccess({ 
+          ipv4: ipData.ipv4 || undefined,
+          ipv6: ipData.ipv6 || undefined
+        })
       } catch (error) {
         console.warn('Failed to record access:', error)
       }
@@ -74,7 +86,8 @@ export default function Home() {
 
     try {
       // Get client IP
-      const clientIp = await getClientIp()
+      const ipData = await getClientIp()
+      const clientIp = ipData.ipv4 || ""
 
       // Upload file and create scan task
       const result = await createScanTask(data.email, selectedFile, clientIp)

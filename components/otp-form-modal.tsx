@@ -91,8 +91,9 @@ export function OTPFormModal({ isOpen, onClose, onSubmit, fileName, fileSize }: 
     setError(null)
     try {
       // Get client IP to update access log with email
-      const clientIp = await getClientIp()
-      const result = await verifyOtp(formData.email, formData.otp, clientIp)
+      const ipData = await getClientIp()
+      console.log('Client IP data in OTP verify:', ipData)
+      const result = await verifyOtp(formData.email, formData.otp, ipData.ipv4, ipData.ipv6)
       if (result.verified) {
         setOtpVerified(true)
         setSuccessMessage("OTP verified successfully")

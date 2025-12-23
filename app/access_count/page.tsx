@@ -54,8 +54,20 @@ export default function AccessCountPage() {
   useEffect(() => {
     const recordPageAccess = async () => {
       try {
-        const ip = await getClientIp()
-        await recordAccess({ ipv4: ip })
+        const ipData = await getClientIp()
+        console.log('Client IP data:', ipData)
+        
+        if (!ipData.ipv4) {
+          console.warn('Failed to get IPv4 address')
+        }
+        if (!ipData.ipv6) {
+          console.warn('Failed to get IPv6 address')
+        }
+        
+        await recordAccess({ 
+          ipv4: ipData.ipv4 || undefined,
+          ipv6: ipData.ipv6 || undefined
+        })
       } catch (error) {
         console.warn('Failed to record access:', error)
       }
@@ -222,7 +234,7 @@ export default function AccessCountPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">IP duy nhất</p>
-                  <p className="text-3xl font-bold">{stats.uniqueIPs.toLocaleString('vi-VN')}</p>
+                  <p className="text-3xl font-bold">{(typeof stats.uniqueIPs === 'number' ? stats.uniqueIPs : 0).toLocaleString('vi-VN')}</p>
                 </div>
               </div>
             </div>
@@ -234,7 +246,7 @@ export default function AccessCountPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Tổng lượt truy cập</p>
-                  <p className="text-3xl font-bold">{stats.totalAccessCount.toLocaleString('vi-VN')}</p>
+                  <p className="text-3xl font-bold">{(typeof stats.totalAccessCount === 'number' ? stats.totalAccessCount : 0).toLocaleString('vi-VN')}</p>
                 </div>
               </div>
             </div>
