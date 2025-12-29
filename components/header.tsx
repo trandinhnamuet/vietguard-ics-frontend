@@ -26,7 +26,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-white/10 backdrop-blur-sm supports-[backdrop-filter]:bg-white/10 transition-all duration-300">
-      <div className="container mx-auto px-4 py-4">
+      {/* Lớp phủ trắng mờ 50% */}
+      <div className="absolute inset-0 w-full h-full bg-white opacity-40 pointer-events-none z-0" />
+      <div className="relative container mx-auto px-4 py-4 z-10">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
@@ -40,7 +42,6 @@ export function Header() {
               />
             </div>
             <span className="text-xl font-bold text-white drop-shadow-lg">
-              VietGuardScan
             </span>
           </Link>
 
