@@ -30,12 +30,12 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <div className="relative w-10 h-10">
+            <div className="relative w-36 h-10">
               <Image
-                src="https://icss.com.vn/wp-content/uploads/2025/08/Thiet-ke-chua-co-ten-23-1024x1024.png"
+                src="/vietguard-logo.png"
                 alt="VietGuardScan Logo"
-                width={40}
-                height={40}
+                width={200}
+                height={200}
                 className="rounded-lg"
               />
             </div>
