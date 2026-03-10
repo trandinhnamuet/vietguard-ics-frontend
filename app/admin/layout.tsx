@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { AdminPasswordGate } from "@/components/admin-password-gate"
 import { Menu, X, BarChart3, Users } from "lucide-react"
 
 export default function AdminLayout({
@@ -38,6 +39,7 @@ export default function AdminLayout({
   }
 
   return (
+    <AdminPasswordGate>
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <Header />
 
@@ -93,5 +95,6 @@ export default function AdminLayout({
 
       <Footer />
     </div>
+    </AdminPasswordGate>
   )
 }

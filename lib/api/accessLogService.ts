@@ -5,6 +5,16 @@
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
+// Read admin password from cookie (set by AdminPasswordGate)
+function getAdminPasswordHeader(): Record<string, string> {
+  if (typeof document === "undefined") return {}
+  const match = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("admin_password="))
+  const password = match ? decodeURIComponent(match.split("=")[1]) : null
+  return password ? { "x-admin-password": password } : {}
+}
+
 // ============= TYPE DEFINITIONS =============
 export interface AccessLog {
   id: number
@@ -87,6 +97,7 @@ export async function getAccessLogs(params: GetAccessLogsParams = {}): Promise<G
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...getAdminPasswordHeader(),
     },
   })
 
@@ -106,6 +117,7 @@ export async function getAccessCount(): Promise<GetAccessCountResponse> {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...getAdminPasswordHeader(),
     },
   })
 
